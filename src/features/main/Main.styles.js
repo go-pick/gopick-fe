@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 const BackgoundGradient = styled.div`
 	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 3.5em;
 	background: linear-gradient(
 		to bottom,
 		#212175 10%,
@@ -10,12 +14,16 @@ const BackgoundGradient = styled.div`
 	);
 `;
 
+const TextWrapper = styled.div`
+	padding: 6em;
+`;
+
 const Title = styled.div`
 	color: '#FFFFFF';
-	font-size: 5em;
+	font-size: 4.5em;
 	font-weight: bold;
 	text-align: center;
-	padding-top: 2em;
+	/* padding-top: 2em; */
 `;
 
 const SubTitle = styled.div`
@@ -28,7 +36,7 @@ const SubTitle = styled.div`
 
 const Description = styled.div`
 	color: '#FFFFFF';
-	font-size: 1.2em;
+	font-size: 1.1em;
 	font-weight: 200;
 	text-align: center;
 	& b {
@@ -36,6 +44,19 @@ const Description = styled.div`
 	}
 `;
 
+const StartButton = styled.button`
+	background-color: rgba(255, 255, 255, 0.5);
+	color: '#ffffff';
+	font-size: 1.2em;
+	width: 15em;
+	padding: 1em;
+	border-radius: 30px;
+	margin: 3em;
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.3);
+	}
+`;
 
 
-export { BackgoundGradient, Title, SubTitle, Description };
+
+export { BackgoundGradient, TextWrapper, Title, SubTitle, Description, StartButton };
