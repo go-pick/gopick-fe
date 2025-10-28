@@ -1,5 +1,6 @@
 import React from 'react';
-import { BackgoundGradient, Description, StartButton, SubTitle, TextWrapper, Title } from './Main.styles';
+import { BackgoundGradient, Description, SubTitle, TextWrapper, Title } from './Main.styles';
+import StartButton from './components/StartButton';
 
 const MainPage = () => {
 	return (
@@ -14,7 +15,7 @@ const MainPage = () => {
 					가장 필요한 기능에 가중치를 두어 최적의 선택을 한눈에!
 				</Description>
 			</TextWrapper>
-			<StartButton>지금 바로 비교하기</StartButton>
+			<StartButton />
 		</BackgoundGradient>
 	);
 };

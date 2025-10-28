@@ -19,7 +19,7 @@ const TextWrapper = styled.div`
 `;
 
 const Title = styled.div`
-	color: '#FFFFFF';
+	color: #FFFFFF;
 	font-size: 4.5em;
 	font-weight: bold;
 	text-align: center;
@@ -27,7 +27,7 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.div`
-	color: '#FFFFFF';
+	color: #FFFFFF;
 	font-size: 2em;
 	font-weight: 400;
 	text-align: center;
@@ -35,7 +35,7 @@ const SubTitle = styled.div`
 	`;
 
 const Description = styled.div`
-	color: '#FFFFFF';
+	color: #FFFFFF;
 	font-size: 1.1em;
 	font-weight: 200;
 	text-align: center;
@@ -44,19 +44,4 @@ const Description = styled.div`
 	}
 `;
 
-const StartButton = styled.button`
-	background-color: rgba(255, 255, 255, 0.5);
-	color: '#ffffff';
-	font-size: 1.2em;
-	width: 15em;
-	padding: 1em;
-	border-radius: 30px;
-	margin: 3em;
-	&:hover {
-		background-color: rgba(255, 255, 255, 0.3);
-	}
-`;
-
-
-
-export { BackgoundGradient, TextWrapper, Title, SubTitle, Description, StartButton };
+export { BackgoundGradient, TextWrapper, Title, SubTitle, Description };

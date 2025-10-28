@@ -3,6 +3,7 @@ import { darkTheme, lightTheme } from './styles/theme';
 import GlobalStyle from './styles/GlobalStyle';
 import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
+import Footer from './components/footer/Footer';
 
 function App() {
 	const [themeMode, setThemeMode] = useState('dark');
@@ -16,6 +17,7 @@ function App() {
 		<ThemeProvider theme={currentTheme}>
 			<GlobalStyle />
 			<MainPage />
+			<Footer />
 		</ThemeProvider>
 	);
 }
