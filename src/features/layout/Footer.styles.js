@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const S = {};
 
-S.FooterWrapper = styled.div`
+S.FooterWrapper = styled.footer`
 	background-color: #2D2D2D;
 	height: 300px;
     display: flex;
