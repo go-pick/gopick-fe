@@ -1,4 +1,4 @@
-import { StyledGridColumn, StyledGridContainer } from "./Grid.Style";
+import { StyledGridColumn, StyledGridContainer } from "./Grid.styles";
 
 const GridContainer = ({ children }) => {
     return (

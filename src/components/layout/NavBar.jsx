@@ -1,7 +1,7 @@
 import React from 'react';
 import S from './NavBar.styles';
 import LogoButton from './LogoButton';
-import { GridColumn, GridContainer } from '../../components/common/Grid';
+import { GridColumn, GridContainer } from '../common/Grid';
 
 const NavBar = () => {
     return (
@@ -19,6 +19,9 @@ const NavBar = () => {
                             비교하기
                         </S.MenuItem>
                     </S.MenuWrapper>
+                </GridColumn>
+                <GridColumn col={3}>
+                    
                 </GridColumn>
             </GridContainer>
         </S.NavContainer>
