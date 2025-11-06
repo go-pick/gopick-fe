@@ -27,6 +27,7 @@ S.MenuItem = styled(Link)`
     font-weight: 400;
     display: inline-block;
     height: 100%;
+    padding: 0 10px;
 
     &:hover {
         font-weight: 600;
@@ -35,4 +36,5 @@ S.MenuItem = styled(Link)`
 `;
 
 
-export default S;       
+
+export default S;
