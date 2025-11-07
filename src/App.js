@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import Footer from './components/layout/footer/Footer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from './components/layout/navbar/NavBar';
+import LoginPage from './features/login/LoginPage';
 
 function App() {
 	const [themeMode, setThemeMode] = useState('dark');
@@ -22,6 +23,7 @@ function App() {
 			<main>
 				<Routes>
 					<Route path='/' element={<MainPage />} />
+					<Route path='/login' element={<LoginPage />} />
 				</Routes>
 			</main>
 			<Footer />
