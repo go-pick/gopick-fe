@@ -6,6 +6,7 @@ const StyledLogoButton = styled(Link)`
     font-weight: 700;
     font-size: 24px;
     aspect-ratio: 1;
+    display: block;
     width: 45px;
     line-height: 45px;
     color: ${({ theme }) => theme.main.regular};

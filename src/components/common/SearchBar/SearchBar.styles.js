@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const SearchContainer = styled.div`
 	display: flex;
 	align-items: center;
-	background-color: #5C6BC0; /* 시안의 네비바 색상 */
-	border-radius: 8px;
-	padding: 8px 16px;
+	background-color: ${({ theme }) => theme.main.darken};
+	border-radius: 30px;
+	padding: 8px 28px;
 	width: 100%;
 	max-width: 400px;
 	height: 48px;

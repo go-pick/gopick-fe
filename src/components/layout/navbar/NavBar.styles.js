@@ -22,16 +22,20 @@ S.MenuWrapper = styled.div`
 
 S.MenuItem = styled(Link)`
     font-size: 1rem;
-    line-height: 60px;
+    /* line-height: 60px; */
     color: #FFFFFF;
     font-weight: 400;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     height: 100%;
     padding: 0 10px;
-
+    box-sizing: border-box;
+    border-width: 3px 0;
+    border-style: solid;
+    border-color: transparent;
     &:hover {
         font-weight: 600;
-        border-bottom: #FFFFFF solid 3px;
+        border-bottom-color: #FFFFFF;
     }
 `;
 

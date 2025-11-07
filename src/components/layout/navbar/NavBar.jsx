@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import S from './NavBar.styles';
 import LogoButton from './LogoButton';
-import { GridColumn, GridContainer } from '../../common/grid/Grid';
+import { GridContainer, GridItem } from '../../common/grid/Grid';
 import UserMenu from './UserMenu';
+import SearchBar from '../../common/SearchBar';
 
 const NavBar = () => {
 
@@ -12,10 +13,10 @@ const NavBar = () => {
     return (
         <S.NavContainer>
             <GridContainer>
-                <GridColumn col={2}>
+                <GridItem colStart={1} colSpan={2}>
                     <LogoButton />
-                </GridColumn>
-                <GridColumn col={2}>
+                </GridItem>
+                <GridItem colStart={3} colSpan={2}>
                     <S.MenuWrapper>
                         <S.MenuItem to={"/howtouse"}>
                             사용법
@@ -24,10 +25,13 @@ const NavBar = () => {
                             비교하기
                         </S.MenuItem>
                     </S.MenuWrapper>
-                </GridColumn>
-                <GridColumn col={3}>
-                    <UserMenu isLoggedIn={isLoggedIn} />
-                </GridColumn>
+                </GridItem>
+                <GridItem colStart={7} colSpan={3}>
+                    <SearchBar />
+                </GridItem>
+                <GridItem colStart={11} colSpan={2}>
+                    <UserMenu />
+                </GridItem>
             </GridContainer>
         </S.NavContainer>
     );
