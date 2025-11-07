@@ -9,7 +9,7 @@ S.NavContainer = styled.nav`
     width: 100%;
     height: 60px;
     background-color: ${({ theme }) => theme.main.regular};
-    
+    z-index: 100;
 `;
 
 S.MenuWrapper = styled.div`
@@ -22,7 +22,6 @@ S.MenuWrapper = styled.div`
 
 S.MenuItem = styled(Link)`
     font-size: 1rem;
-    /* line-height: 60px; */
     color: #FFFFFF;
     font-weight: 400;
     display: flex;
@@ -30,7 +29,7 @@ S.MenuItem = styled(Link)`
     height: 100%;
     padding: 0 10px;
     box-sizing: border-box;
-    border-width: 3px 0;
+    border-width: 2px 0;
     border-style: solid;
     border-color: transparent;
     &:hover {
@@ -38,7 +37,5 @@ S.MenuItem = styled(Link)`
         border-bottom-color: #FFFFFF;
     }
 `;
-
-
 
 export default S;

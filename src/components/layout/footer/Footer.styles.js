@@ -31,7 +31,7 @@ S.IconWrapper = styled.div`
 `;
 
 S.Desription = styled.div`
-    color: '#ffffff';
+    color: #ffffff;
     font-size: 1rem;
 `;
 

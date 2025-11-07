@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 const InputWrapper = styled.div`
 	position: relative;
-	margin-top: 1.5rem;
+	margin: 1.5rem 0.5rem 0.5rem 0.5rem;
+	width: ${({ width }) => width || '100%'};
+	min-width: 10rem;
 `;
 
 const StyledLabel = styled.label`
@@ -19,10 +21,11 @@ const StyledInput = styled.input`
 	padding: 10px 5px;
 	font-size: 1rem;
 	background-color: transparent;
+	width: 100%;
 
 	color: ${({ theme }) => theme.text};
 	border: none;
-	border-bottom: 3px solid ${({ theme }) => theme.text};
+	border-bottom: 2px solid ${({ theme }) => theme.textBox};
 	transition: border-bottom-color 0.2s ease-out;
 	
 	&:focus {
@@ -34,7 +37,6 @@ const StyledInput = styled.input`
 	&:not(:placeholder-shown) + ${StyledLabel} {
 		top: -1rem;
 		font-size: 0.75rem;
-		border-bottom-color: ${({ theme }) => theme.main.deepen};
 	}
 	
 	&:focus + ${StyledLabel} {

@@ -29,7 +29,7 @@ const PopupWrapper = styled.div`
     transform: translateX(-50%);
     width: 120px; // 팝업 너비
     background-color: ${({ theme }) => theme.background};
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px ${({ theme }) => theme.shadow};
     padding: 8px 0;
     z-index: 10;
     

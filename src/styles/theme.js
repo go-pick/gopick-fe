@@ -14,6 +14,8 @@ const lightTheme = {
 	backgroundSub: '#ECF0F7',
 	text: basicColors.black,
 	textSub: grayColors.regular,
+	textBox: '#202020',
+	shadow: 'rgba(0, 0, 0, 0.15)',
 };
 
 const darkTheme = {
@@ -22,6 +24,8 @@ const darkTheme = {
 	backgroundSub: '#2B2B2B',
 	text: basicColors.white,
 	textSub: grayColors.darken,
+	textBox: '#ffffff',
+	shadow: 'rgba(255, 255, 255, 0.1)',
 }
 
 export { lightTheme, darkTheme };

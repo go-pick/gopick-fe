@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import Footer from './components/layout/footer/Footer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from './components/layout/navbar/NavBar';
-import LoginPage from './features/login/LoginPage';
+import LoginPage from './features/auth/LoginPage';
 
 function App() {
 	const [themeMode, setThemeMode] = useState('dark');
