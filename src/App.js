@@ -7,6 +7,7 @@ import Footer from './components/layout/footer/Footer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from './components/layout/navbar/NavBar';
 import LoginPage from './features/auth/LoginPage';
+import ScrollToTop from './components/utils/ScrollToTop';
 
 function App() {
 	const [themeMode, setThemeMode] = useState('dark');
@@ -14,19 +15,22 @@ function App() {
 
 	const toggleTheme = () => {
 		setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-	}
+	};
 
 	return (
 		<ThemeProvider theme={currentTheme}>
 			<GlobalStyle />
-			<NavBar />
-			<main>
-				<Routes>
-					<Route path='/' element={<MainPage />} />
-					<Route path='/login' element={<LoginPage />} />
-				</Routes>
-			</main>
-			<Footer />
+			<BrowserRouter>
+				<ScrollToTop />
+				<NavBar />
+				<main>
+					<Routes>
+						<Route path='/' element={<MainPage />} />
+						<Route path='/login' element={<LoginPage />} />
+					</Routes>
+				</main>
+				<Footer />
+			</BrowserRouter>
 		</ThemeProvider>
 	);
 }
