@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 const InputWrapper = styled.div`
 	position: relative;
-	margin: 1.5rem 0.5rem 0.5rem 0.5rem;
+	margin: 1.5rem 0.5rem 1.25rem 0.5rem;
 	width: ${({ width }) => width || '100%'};
-	min-width: 10rem;
+	min-width: 20rem;
 `;
 
 const StyledLabel = styled.label`
@@ -25,7 +25,11 @@ const StyledInput = styled.input`
 
 	color: ${({ theme }) => theme.text};
 	border: none;
-	border-bottom: 2px solid ${({ theme }) => theme.textBox};
+	border-bottom: 2px solid ${({ theme, $status }) => 
+		$status === 'error'
+		? theme.semantic.error
+		: theme.textBox
+	};
 	transition: border-bottom-color 0.2s ease-out;
 	
 	&:focus {
@@ -48,4 +52,17 @@ const StyledInput = styled.input`
 	}
 `;
 
-export { InputWrapper, StyledInput, StyledLabel };
+const Caption = styled.div`
+	font-size: 0.75rem;
+	position: absolute;
+	bottom: -1.3rem;
+	left: 5px;
+
+	color: ${({ theme, $status }) => 
+		$status === 'error'
+		? theme.semantic.error 
+		: theme.semantic.success
+	};
+`;
+
+export { InputWrapper, StyledInput, StyledLabel, Caption };

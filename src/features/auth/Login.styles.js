@@ -3,7 +3,7 @@ import styled from "styled-components";
 const S = {};
 
 S.Screen = styled.div`
-	min-height: 100vh;
+	min-height: calc(100vh - 60px);
 	display: flex;
 	flex-direction: column;
 `;

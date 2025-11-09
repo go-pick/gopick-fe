@@ -8,9 +8,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from './components/layout/navbar/NavBar';
 import LoginPage from './features/auth/LoginPage';
 import ScrollToTop from './components/utils/ScrollToTop';
+import SignupPage from './features/auth/SignupPage';
 
 function App() {
-	const [themeMode, setThemeMode] = useState('dark');
+	const [themeMode, setThemeMode] = useState('light');
 	const currentTheme = themeMode === 'light' ? lightTheme : darkTheme;
 
 	const toggleTheme = () => {
@@ -27,6 +28,7 @@ function App() {
 					<Routes>
 						<Route path='/' element={<MainPage />} />
 						<Route path='/login' element={<LoginPage />} />
+						<Route path='/signup' element={<SignupPage />} />
 					</Routes>
 				</main>
 				<Footer />
