@@ -5,10 +5,7 @@ import { GridContainer, GridItem } from '../../common/grid/Grid';
 import UserMenu from './UserMenu';
 import SearchBar from '../../common/SearchBar';
 
-const NavBar = () => {
-
-    // Todo : 추후에 전역 상태로 관린
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+const NavBar = () => { 
 
     return (
         <S.NavContainer>

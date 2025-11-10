@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { PersonCircle } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { useAuth } from '../../../contexts/AuthContext';
 
 const MenuContainer = styled.div`
     position: relative;
@@ -39,27 +40,49 @@ const PopupWrapper = styled.div`
     display: ${props => (props.$isvisible ? 'block' : 'none')};
 `;
 
-const PopupItem = styled(Link)`
+const popupItemStyles = css`
     display: block;
+    width: 100%;
     padding: 10px 16px;
     font-size: 0.9rem;
     font-weight: 500;
-    color: ${({ theme }) => theme.text}; // 테마의 텍스트 색상을 사용해도 좋습니다.
+    color: ${({ theme }) => theme.text};
     text-decoration: none;
     text-align: center;
+    background: none;
+    border: none;
+    cursor: pointer;
 
     &:hover {
-        background-color: ${({ theme}) => theme.backgroundSub}; // 호버 시 배경색
+        background-color: ${({ theme}) => theme.backgroundSub};
     }
 `;
 
+const PopupLink = styled(Link)`
+    ${popupItemStyles}
+`;
+
+const PopupButton = styled.button`
+    ${popupItemStyles}
+`;
+
+const LogoutButton = styled(PopupButton)`
+    color: ${({ theme }) => theme.semantic.error};
+`;
 
 
-const UserMenu = ({ isLoggedIn }) => {
+const UserMenu = () => {
+    const { isLoggedIn, logout } = useAuth();
+
     const [isMenuVisible, setMenuVisible] = useState(false);
 
     const showMenu = () => setMenuVisible(true);
     const hideMenu = () => setMenuVisible(false);
+
+    const handleLogout =  async () => {
+        await logout();
+        hideMenu();
+    };
 
     return (
         <MenuContainer
@@ -70,13 +93,13 @@ const UserMenu = ({ isLoggedIn }) => {
             <PopupWrapper $isvisible={isMenuVisible}>
                 {isLoggedIn ? (
                     <>
-                        <PopupItem to="/mypage">마이페이지</PopupItem>
-                        <PopupItem to="/logout">로그아웃</PopupItem>
+                        <PopupLink to="/mypage" onClick={hideMenu}>마이페이지</PopupLink>
+                        <LogoutButton to="/logout" onClick={handleLogout}>로그아웃</LogoutButton>
                     </>
                 ) : (
                     <>
-                        <PopupItem to="login">로그인</PopupItem>
-                        <PopupItem to="signup">회원가입</PopupItem>
+                        <PopupLink to="login" onClick={hideMenu}>로그인</PopupLink>
+                        <PopupLink to="signup" onClick={hideMenu}>회원가입</PopupLink>
                     </>
                 )}
             </PopupWrapper>
