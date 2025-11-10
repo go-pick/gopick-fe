@@ -19,4 +19,23 @@ const signup = (userData) => {
 	return apiClient.post(`/auth/signup`, userData);
 };
 
-export { checkUsername, signup };
+const apiLogin = async (email, password) => {
+    const response = await fetch('http://localhost:3001/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        // 백엔드에서 보낸 에러 메시지를 사용
+        throw new Error(data.error || '로그인에 실패했습니다.');
+    }
+    
+    return data; // { message, session, user }
+};
+
+export { checkUsername, signup, apiLogin };

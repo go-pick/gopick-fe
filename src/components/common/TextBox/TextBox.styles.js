@@ -58,10 +58,15 @@ const Caption = styled.div`
 	bottom: -1.3rem;
 	left: 5px;
 
-	color: ${({ theme, $status }) => 
-		$status === 'error'
-		? theme.semantic.error 
-		: theme.semantic.success
+	color: ${({ theme, $status }) => {
+		switch($status) {
+			case 'error':
+				return theme.semantic.error;
+			case 'success':
+				return theme.semantic.success;
+			default:
+				return theme.textSub;
+		} }
 	};
 `;
 

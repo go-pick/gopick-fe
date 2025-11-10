@@ -12,7 +12,7 @@ import SignupPage from './features/auth/SignupPage';
 import VerifyEmailPage from './features/auth/VerifyEmailPage';
 
 function App() {
-	const [themeMode, setThemeMode] = useState('light');
+	const [themeMode, setThemeMode] = useState('dark');
 	const currentTheme = themeMode === 'light' ? lightTheme : darkTheme;
 
 	const toggleTheme = () => {

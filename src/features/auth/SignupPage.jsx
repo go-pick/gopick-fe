@@ -75,7 +75,7 @@ const SignupPage = () => {
 		// 3 모든 규칙 통과
 		if (value.length >= 6) {
 			setUsernameCaption('중복 확인 중...');
-			setUsernameStatus('default');
+			setUsernameStatus('success');
 			checkUsernameApi(value);
 		} else {
 			// 0글자 일 때 (초기화)
@@ -129,7 +129,7 @@ const SignupPage = () => {
 		}
 
 		setPasswordCaption('사용 가능한 비밀번호입니다.');
-		setPasswordStatus('default');
+		setPasswordStatus('success');
 		return true;
 	};
 

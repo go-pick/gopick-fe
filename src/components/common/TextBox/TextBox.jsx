@@ -14,7 +14,7 @@ const TextBox = React.forwardRef(({ label, id, width, caption, status='default',
 				ref={ref}
 				{...rest}
 			/>
-			<StyledLabel htmlFor='inputId'>
+			<StyledLabel htmlFor={inputId}>
 				{label}
 			</StyledLabel>
 			{caption && (
