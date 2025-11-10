@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledStartButton = styled(Link)`
+	display: inline-block;
 	background-color: rgba(255, 255, 255, 0.5);
-	color: '#ffffff';
+	color: #ffffff;
 	font-size: 1.2em;
 	width: 15em;
 	text-decoration: none;

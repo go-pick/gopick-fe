@@ -9,6 +9,7 @@ import NavBar from './components/layout/navbar/NavBar';
 import LoginPage from './features/auth/LoginPage';
 import ScrollToTop from './components/utils/ScrollToTop';
 import SignupPage from './features/auth/SignupPage';
+import VerifyEmailPage from './features/auth/VerifyEmailPage';
 
 function App() {
 	const [themeMode, setThemeMode] = useState('light');
@@ -29,6 +30,8 @@ function App() {
 						<Route path='/' element={<MainPage />} />
 						<Route path='/login' element={<LoginPage />} />
 						<Route path='/signup' element={<SignupPage />} />
+
+						<Route path="/verify-email" element={<VerifyEmailPage />} />
 					</Routes>
 				</main>
 				<Footer />

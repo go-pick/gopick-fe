@@ -1,15 +1,22 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import S from './Signup.styles';
 import { Button, TextBox } from '../../components/common';
 import _ from 'lodash';
-import { checkUsername } from '../../api/api';
+import { checkUsername, signup } from '../../api/api';
+import { useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
+	const navigate = useNavigate();
 
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
+
+	const usernameRef = useRef(null);
+	const emailRef = useRef(null);
+	const passwordRef = useRef(null);
+	const passwordConfirmRef = useRef(null);
 
 	const [usernameCaption, setUsernameCaption] = useState('');
 	const [usernameStatuts, setUsernameStatus] = useState('default');
@@ -24,7 +31,6 @@ const SignupPage = () => {
 
 	const [confirmCaption, setConfirmCaption] = useState('');
 	const [confirmStatus, setConfirmStatus] = useState('default');
-
 
 	const checkUsernameApi = useCallback(
 		_.debounce(async (name) => {
@@ -164,10 +170,57 @@ const SignupPage = () => {
 		}
 	};
 
+	const handleSubmit = async (e) => {
+		e.preventDefault();	// form의 새로고침을 막는다.
+
+		// 최종 유혀성 검사
+		if (usernameStatuts === 'error' || username.length < 6) {
+			alert('아이디를 확인해주세요.');
+			usernameRef.current.focus();
+			return;
+		}
+		if (usernameCaption === '중복 확인 중...') {
+			alert('아이디 중복 확인이 완료될 때 까지 잠시 기다려주세요.');
+			usernameRef.current.focus();
+			return;
+		}
+
+		if (!validateEmail(email)) {
+			alert('이메일 형식을 확인해주세요.');
+			emailRef.current.focus();
+			return;
+		}
+
+		if (!validatePassword(password)) {
+			alert('비밀번호 형식을 확인해주세요.');
+			passwordRef.current.focus();
+			return;
+		}
+
+		if (password !== passwordConfirm) {
+			setConfirmCaption('비밀번호가 일치하지 않습니다.');
+            setConfirmStatus('error');
+            alert('비밀번호가 일치하지 않습니다.');
+            passwordConfirmRef.current.focus(); // 3. 포커스 이동
+            return;
+		}
+
+		// BE API
+		try {
+			const { data } = await signup({ username, email, password });	
+			alert('회원가입이 완료되었습니다! 이메일 인증 후 로그인 해주세요.');
+			navigate('/login');
+			// setIsEmailSent(true);
+		} catch (error) {
+			console.error('회원가입 실패 :', error.response?.data);
+			alert(`회원가입 실패: ${error.response?.data?.error || '알 수 없는 오류'}`);
+		}
+	};
+
 	return (
 		<S.Screen>
 			<S.Title>회원가입</S.Title>
-			<S.ContentWrapper>
+			<S.ContentWrapper as='form' onSubmit={handleSubmit}>
 				<TextBox
 					label={'ID'}
 					id={'textbox-username'}
@@ -210,7 +263,7 @@ const SignupPage = () => {
 					회원가입 후 인증 이메일이 발송됩니다 <br />
 					이메일 인증 절차를 꼭 밟아주세요
 				</S.Description>
-				<Button variant='solid'>
+				<Button variant='solid' type="submit">
 					회원가입
 				</Button>
 				<div style={{height: '7rem'}} ></div>

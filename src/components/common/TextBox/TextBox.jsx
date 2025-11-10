@@ -1,8 +1,8 @@
 import React from 'react';
 import { Caption, InputWrapper, StyledInput, StyledLabel } from './TextBox.styles';
 
-const TextBox = ({ label, id, width, caption, status='default', ...rest }) => {
-
+const TextBox = React.forwardRef(({ label, id, width, caption, status='default', ...rest }, ref) => {
+	
 	// id가 없을 시 자동 생성
 	const inputId = id || `textbox-${label.replace(/\s+/g, '-').toLowerCase()}`;
 	
@@ -11,6 +11,7 @@ const TextBox = ({ label, id, width, caption, status='default', ...rest }) => {
 			<StyledInput
 				id={inputId}
 				placeholder=''
+				ref={ref}
 				{...rest}
 			/>
 			<StyledLabel htmlFor='inputId'>
@@ -23,6 +24,6 @@ const TextBox = ({ label, id, width, caption, status='default', ...rest }) => {
 			)}
 		</InputWrapper>
 	);
-};
+});
 
 export default TextBox;
