@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { TextBox, Button } from '../../components/common';
 import S from './Login.styles';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { apiLogin } from '../../api/api';
 import { supabase } from '../../supabaseClient';
 
 const LoginPage = () => {
 	const contentWidth = '30%';
 
+	const location = useLocation();
 	const navigate = useNavigate();
+
+	const from = location.state?.from?.pathname || '/';
 
 	const [inputs, setInputs] = useState({
 		email: '',
@@ -58,8 +61,6 @@ const LoginPage = () => {
 
 		try {
 			const data = await apiLogin(email, password);
-
-			// localStorage.setItem('supabaseSession', JSON.stringify(data.session));
 			const { error } = supabase.auth.setSession(data.session);
 
 			if (error) {
@@ -67,7 +68,7 @@ const LoginPage = () => {
 			}
 
 			alert('로그인 성공');
-			navigate('/'); // 메인 페이지로
+			navigate(from, { replace: true }); // 이전 페이지 혹은 메인페이지
 		} catch(err) {
 			console.error('로그인 실패:', err);
 			// API로부터 받은 에러 메시지를 캡션으로 설정

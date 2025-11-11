@@ -20,6 +20,8 @@ const GridItem = styled.div`
     justify-content: center; /* 가로 중앙 정렬 */
     align-items: center;
     height: 100%;
+
+    /* transition: all 0.3s ease-out; */
 `;
 
 export { GridItem, GridContainer };

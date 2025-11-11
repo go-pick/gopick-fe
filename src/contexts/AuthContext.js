@@ -56,7 +56,12 @@ const AuthProvider = ({ children }) => {
 		session,
 		isLoggedIn: !!session,
 		logout,
+		isLoading: loading,
 	};
+
+	if (loading) {
+		return <div>Loading...</div>
+	}
 
 	return (
 		<AuthContext.Provider value={value}>

@@ -50,7 +50,7 @@ const MovingKnob = styled.div`
 	background-color: ${({ theme }) => theme.main.regular};
 	z-index: 1;
 
-	transition: transform 0.3s ease-in-out;
+	transition: transform 0.3s ease-out;
 
 	/* $mode prop에 따라 이동 
 		(이동 거리 = 아이콘 너비 30px + 중간 여백 4px = 34px) 
