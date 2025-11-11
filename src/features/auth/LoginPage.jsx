@@ -70,13 +70,16 @@ const LoginPage = () => {
 			alert('로그인 성공');
 			navigate(from, { replace: true }); // 이전 페이지 혹은 메인페이지
 		} catch(err) {
-			console.error('로그인 실패:', err);
-			// API로부터 받은 에러 메시지를 캡션으로 설정
-			setValidation({
-				email: { status: 'error', message: '이메일 또는 비밀번호가 일치하지 않습니다.' },
-				// 비밀번호 필드에는 에러 상태만 주고 메시지는 비워서 중복 방지 (선택 사항)
-				password: { status: 'error', message: ' ' } 
-			});
+			if (err.message === "Email not confirmed") {
+				// Supabase가 반환하는 특정 에러 메시지입니다.
+				alert("이메일 인증이 필요합니다. 가입 시 사용한 메일을 확인해주세요.");
+			} else {
+				console.error('로그인 실패:', err);
+				setValidation({
+					email: { status: 'error', message: '이메일 또는 비밀번호가 일치하지 않습니다.' },
+					password: { status: 'error', message: ' ' } 
+				});
+			}
 		} finally {
 			setIsLoading(false);
 		}

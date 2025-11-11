@@ -6,13 +6,13 @@ const ThemeContext = createContext();
 
 const CustomThemeProvider = ({ children }) => {
 	const [themeMode, setThemeMode] = useState(() => {
-		// 로컬 스토리지에서 'goPick_themeMode' 키로 값을 가져옵니다.
+		// 로컬 스토리지에 기존 값이 있는지 확인
 		const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-		return savedTheme || 'dark';
+		return savedTheme || 'light';
 	});
 	
 	useEffect(() => {
-		// 'goPick_themeMode' 키로 현재 themeMode 값을 저장합니다.
+		// 'goPick_themeMode' 키로 현재 themeMode 값을 저장.
 		localStorage.setItem(THEME_STORAGE_KEY, themeMode);
 	}, [themeMode]);
 	

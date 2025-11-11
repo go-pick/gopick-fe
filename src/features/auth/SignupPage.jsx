@@ -42,7 +42,7 @@ const SignupPage = () => {
 					setUsernameStatus('error');
 				} else {
 					setUsernameCaption('사용 가능한 아이디입니다.');
-					setUsernameStatus('default');
+					setUsernameStatus('success');
 				}
 			} catch(error) {
 				console.error('중복 확인 실패 :', error);
