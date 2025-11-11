@@ -11,15 +11,12 @@ import ScrollToTop from './components/utils/ScrollToTop';
 import SignupPage from './features/auth/SignupPage';
 import VerifyEmailPage from './features/auth/VerifyEmailPage';
 import { AuthProvider } from './contexts/AuthContext';
+import { CustomThemeProvider, useTheme } from './contexts/ThemeContext';
 
-function App() {
-	const [themeMode, setThemeMode] = useState('dark');
+function AppContent() {
+	const { themeMode } = useTheme();
 	const currentTheme = themeMode === 'light' ? lightTheme : darkTheme;
-
-	const toggleTheme = () => {
-		setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-	};
-
+	
 	return (
 		<ThemeProvider theme={currentTheme}>
 			<GlobalStyle />
@@ -32,7 +29,7 @@ function App() {
 							<Route path='/' element={<MainPage />} />
 							<Route path='/login' element={<LoginPage />} />
 							<Route path='/signup' element={<SignupPage />} />
-
+	
 							<Route path="/verify-email" element={<VerifyEmailPage />} />
 						</Routes>
 					</main>
@@ -41,6 +38,15 @@ function App() {
 			</BrowserRouter>
 		</ThemeProvider>
 	);
+};
+
+function App() {
+	
+	return (
+		<CustomThemeProvider>
+			<AppContent />
+		</CustomThemeProvider>
+	)
 }
 
 export default App;

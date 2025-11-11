@@ -3,6 +3,7 @@ import { TextBox, Button } from '../../components/common';
 import S from './Login.styles';
 import { useNavigate } from 'react-router-dom';
 import { apiLogin } from '../../api/api';
+import { supabase } from '../../supabaseClient';
 
 const LoginPage = () => {
 	const contentWidth = '30%';
@@ -58,17 +59,23 @@ const LoginPage = () => {
 		try {
 			const data = await apiLogin(email, password);
 
-			localStorage.setItem('supabaseSession', JSON.stringify(data.session));
+			// localStorage.setItem('supabaseSession', JSON.stringify(data.session));
+			const { error } = supabase.auth.setSession(data.session);
+
+			if (error) {
+				throw new Error(error.message);
+			}
+
 			alert('로그인 성공');
 			navigate('/'); // 메인 페이지로
 		} catch(err) {
 			console.error('로그인 실패:', err);
-            // API로부터 받은 에러 메시지를 캡션으로 설정
-            setValidation({
-                email: { status: 'error', message: '이메일 또는 비밀번호가 일치하지 않습니다.' },
-                // 비밀번호 필드에는 에러 상태만 주고 메시지는 비워서 중복 방지 (선택 사항)
-                password: { status: 'error', message: ' ' } 
-            });
+			// API로부터 받은 에러 메시지를 캡션으로 설정
+			setValidation({
+				email: { status: 'error', message: '이메일 또는 비밀번호가 일치하지 않습니다.' },
+				// 비밀번호 필드에는 에러 상태만 주고 메시지는 비워서 중복 방지 (선택 사항)
+				password: { status: 'error', message: ' ' } 
+			});
 		} finally {
 			setIsLoading(false);
 		}
