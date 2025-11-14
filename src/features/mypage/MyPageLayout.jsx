@@ -4,6 +4,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { GridContainer, GridItem } from '../../components/common/grid/Grid';
 import MyPageSideBar from './components/MyPageSidebar';
+import { getUsername } from '../../api/api';
 
 const ANIMATION_DURATION_MS = 300;
 
@@ -15,8 +16,31 @@ const MyPageLayout = () => {
 	const [isPaddingExpanded, setIsPaddingExpanded] = useState(true);
 	const [isUiExpanded, setIsUiExpanded] = useState(true);
 
+	const [username, setUsername] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 	const { session } = useAuth();
 	const location = useLocation();
+	
+	useEffect(() => {
+		const fetchUsername = async () => {
+			if (!session) {
+				setIsLoading(false);
+				return;
+			}
+
+			try {
+				const profileData = await getUsername(session.access_token);
+				setUsername(profileData.username);
+			} catch(error) {
+				console.error('Failed to fetch username:' , error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchUsername();
+
+	}, [session]);
 	
 	useEffect(() => {
         const timer = setTimeout(() => {
@@ -59,10 +83,15 @@ const MyPageLayout = () => {
 	return (
 		<S.PageContainer>
 			<S.Title>
-				{session?.user?.email ? `${session.user.email}님, ` : ''}환영합니다
+				{
+					isLoading
+					? "회원 정보를 가져오는 중입니다."
+					: `${username}님, 환영합니다.`
+				}
 			</S.Title>
 			<GridContainer>
 				<GridItem
+					align={"flex-start"}
 					colStart={2}
 					colSpan={sidebarSpan}
 					onMouseEnter={()=>{setIsHovered(true)}}
