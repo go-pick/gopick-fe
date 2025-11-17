@@ -36,7 +36,7 @@ const SidebarLink = styled(NavLink)`
 	background-color: transparent;
 	transition: background-color 0.3s ease-out,
 			color 0.3s ease-out,
-			width 0.3s ease-in-out;
+			width 0.3s ease-out;
 
 	&.active {
 		background-color: ${({ theme }) => theme.main.regular};
@@ -59,7 +59,7 @@ const LinkText = styled.span`
 	opacity: ${props => (props.$isExpanded ? 1 : 0)};
 	max-width: ${props => (props.$isExpanded ? '150px' : '0px')};
 	overflow: hidden;
-	transition: all 0.3s ease-out;
+	transition: all 0.3s ease-in;
 `;
 
 const MyPageSideBar = ({ isUiExpanded, isPaddingExpanded }) => {

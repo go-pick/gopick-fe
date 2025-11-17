@@ -1,10 +1,11 @@
 import React from 'react';
+import S from '../MyPage.styles';
 
 const ChangeEmailPage = () => {
 	return (
-		<div>
+		<S.ContentWrapper>
 			이베일 변경하기
-		</div>
+		</S.ContentWrapper>
 	);
 };
 

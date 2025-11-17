@@ -20,14 +20,14 @@ const MyPageLayout = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const { session } = useAuth();
 	const location = useLocation();
-	
+
 	useEffect(() => {
 		const fetchUsername = async () => {
 			if (!session) {
 				setIsLoading(false);
 				return;
 			}
-
+			
 			try {
 				const profileData = await getUsername(session.access_token);
 				setUsername(profileData.username);
@@ -37,48 +37,53 @@ const MyPageLayout = () => {
 				setIsLoading(false);
 			}
 		};
-
+		
 		fetchUsername();
-
+		
 	}, [session]);
 	
 	useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsInitialLoad(false);
+		const timer = setTimeout(() => {
+			setIsInitialLoad(false);
         }, 1000); 
         return () => clearTimeout(timer);
     }, []);
-
+	
 	const isMasterExpanded = isInitialLoad || isHovered;
-
+	
 	useEffect(() => {
-        let timer; // 지연 타이머
-
+		let timer; // 지연 타이머
+		
         if (isMasterExpanded) {
-            // --- (호버 시) ---
+			// --- (호버 시) ---
 			setIsPaddingExpanded(true);
-
+			
             timer = setTimeout(() => {
 				setIsGridExpanded(true); 
                 setIsUiExpanded(true);
             }, ANIMATION_DURATION_MS);
-
+			
         } else {
-            // --- (호버 해제 시) ---
+			// --- (호버 해제 시) ---
             setIsUiExpanded(false); 
-
+			setIsGridExpanded(false);
             timer = setTimeout(() => {
-                setIsPaddingExpanded(false);
-                setIsGridExpanded(false);
+				setIsPaddingExpanded(false);
             }, ANIMATION_DURATION_MS);
         }
-
+		
         return () => clearTimeout(timer);
     }, [isMasterExpanded]); // isMasterExpanded가 바뀔 때마다 실행
+	
+	const sidebarColStart = 2;
+	const sidebarColSpan = 1;
+	const contentColStart = 3;
+	const contentColSpan = 1;
 
-	const sidebarSpan = isGridExpanded ? 3 : 1;
-	const contentSpan = isGridExpanded ? 7 : 9;
-	const contentStart = 2 + sidebarSpan; // 사이드바 바로 다음 열에서 시작
+	const gtc = isGridExpanded
+        ? "1fr 3fr 7fr 1fr" // 사이드바 확장 시 (1 + 3 + 7 + 1 = 12)
+        : "1fr 1fr 9fr 1fr"
+	;
 	
 	return (
 		<S.PageContainer>
@@ -89,11 +94,12 @@ const MyPageLayout = () => {
 					: `${username}님, 환영합니다.`
 				}
 			</S.Title>
-			<GridContainer>
+			<GridContainer gtc={gtc}>
 				<GridItem
+					height="fit-content"
 					align={"flex-start"}
-					colStart={2}
-					colSpan={sidebarSpan}
+					colStart={sidebarColStart}
+					colSpan={sidebarColSpan}
 					onMouseEnter={()=>{setIsHovered(true)}}
 					onMouseLeave={()=>{setIsHovered(false)}}
 					// style={{ transition: 'all 0.3s ease-in-out' }}
@@ -101,8 +107,8 @@ const MyPageLayout = () => {
 					<MyPageSideBar isUiExpanded={isUiExpanded} isPaddingExpanded={isPaddingExpanded}/>
 				</GridItem>
 				<GridItem
-					colStart={contentStart}
-					colSpan={contentSpan}
+					colStart={contentColStart}
+					colSpan={contentColSpan}
 				>
 					<Outlet />
 				</GridItem>

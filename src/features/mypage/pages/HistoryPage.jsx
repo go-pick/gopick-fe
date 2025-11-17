@@ -1,10 +1,11 @@
 import React from 'react';
+import S from '../MyPage.styles';
 
 const HistoryPage = () => {
 	return (
-		<div>
+		<S.ContentWrapper>
 			기록보기
-		</div>
+		</S.ContentWrapper>
 	);
 };
 

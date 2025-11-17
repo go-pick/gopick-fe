@@ -3,10 +3,16 @@ import styled from "styled-components";
 const GridContainer = styled.div`
     display: grid;
     padding: 0 20px;
-    grid-template-columns: repeat(12, 1fr); /* 12개의 동일한 너비의 컬럼 */
-    gap: 16px; /* 컬럼 사이의 간격 (0으로 설정 가능) */
+    // grid-template-columns: repeat(12, 1fr); /* 12개의 동일한 너비의 컬럼 */
+    // gap: 16px; /* 컬럼 사이의 간격 (0으로 설정 가능) */
+
+    grid-template-columns: ${props => props.gtc || 'repeat(12, 1fr)'};
+    gap: ${props => props.gap || '1.5rem'};
+
     width: 100%;
     height: 100%;
+
+    transition: grid-template-columns 300ms ease-in-out;
 `;
 
 const GridItem = styled.div`
@@ -18,10 +24,8 @@ const GridItem = styled.div`
 
     display: flex;
     justify-content: center; /* 가로 중앙 정렬 */
-    align-items: center;
-    height: 100%;
-
-    /* transition: all 0.3s ease-out; */
+    align-items: ${props => props.align || 'center'};
+    height: ${props => props.height || '100%'};
 `;
 
 export { GridItem, GridContainer };

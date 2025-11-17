@@ -1,10 +1,11 @@
 import React from 'react';
+import S from '../MyPage.styles';
 
 const ChangePasswordPage = () => {
 	return (
-		<div>
+		<S.ContentWrapper>
 			비밀번호 변경하기
-		</div>
+		</S.ContentWrapper>
 	);
 };
 

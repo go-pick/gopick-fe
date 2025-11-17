@@ -15,13 +15,12 @@ S.Title = styled.h1`
 `;
 
 S.ContentWrapper = styled.div`
-	background-color: ${({ theme }) => theme.background};
-	border-radius: 12px;
+	border-radius: 30px;
 	padding: 2rem;
+	border: 1px solid ${({ theme }) => theme.gray.regular};
 	width: 100%;
-	min-height: 60vh; // 최소 높이
+	min-height: 70vh; // 최소 높이
 
-	/* 콘텐츠 영역이 바뀔 때 부드러운 전환 효과 */
 	transition: all 0.3s ease-in-out;
 `;
 
