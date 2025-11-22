@@ -3,8 +3,6 @@ import styled from "styled-components";
 const GridContainer = styled.div`
     display: grid;
     padding: 0 20px;
-    // grid-template-columns: repeat(12, 1fr); /* 12개의 동일한 너비의 컬럼 */
-    // gap: 16px; /* 컬럼 사이의 간격 (0으로 설정 가능) */
 
     grid-template-columns: ${props => props.gtc || 'repeat(12, 1fr)'};
     gap: ${props => props.gap || '1.5rem'};
@@ -23,7 +21,7 @@ const GridItem = styled.div`
     grid-column-end: span ${props => props.colSpan || 1};
 
     display: flex;
-    justify-content: center; /* 가로 중앙 정렬 */
+    justify-content: center;
     align-items: ${props => props.align || 'center'};
     height: ${props => props.height || '100%'};
 `;

@@ -52,10 +52,9 @@ const MyPageLayout = () => {
 	const isMasterExpanded = isInitialLoad || isHovered;
 	
 	useEffect(() => {
-		let timer; // 지연 타이머
+		let timer;
 		
-        if (isMasterExpanded) {
-			// --- (호버 시) ---
+        if (isMasterExpanded) {		// 호버 시
 			setIsPaddingExpanded(true);
 			
             timer = setTimeout(() => {
@@ -63,8 +62,7 @@ const MyPageLayout = () => {
                 setIsUiExpanded(true);
             }, ANIMATION_DURATION_MS);
 			
-        } else {
-			// --- (호버 해제 시) ---
+        } else {					// 호버 해제 시
             setIsUiExpanded(false); 
 			setIsGridExpanded(false);
             timer = setTimeout(() => {
@@ -73,15 +71,15 @@ const MyPageLayout = () => {
         }
 		
         return () => clearTimeout(timer);
-    }, [isMasterExpanded]); // isMasterExpanded가 바뀔 때마다 실행
-	
+    }, [isMasterExpanded]);
+
 	const sidebarColStart = 2;
 	const sidebarColSpan = 1;
 	const contentColStart = 3;
 	const contentColSpan = 1;
 
 	const gtc = isGridExpanded
-        ? "1fr 3fr 7fr 1fr" // 사이드바 확장 시 (1 + 3 + 7 + 1 = 12)
+        ? "1fr 3fr 7fr 1fr"
         : "1fr 1fr 9fr 1fr"
 	;
 	
@@ -102,7 +100,6 @@ const MyPageLayout = () => {
 					colSpan={sidebarColSpan}
 					onMouseEnter={()=>{setIsHovered(true)}}
 					onMouseLeave={()=>{setIsHovered(false)}}
-					// style={{ transition: 'all 0.3s ease-in-out' }}
 				>
 					<MyPageSideBar isUiExpanded={isUiExpanded} isPaddingExpanded={isPaddingExpanded}/>
 				</GridItem>
