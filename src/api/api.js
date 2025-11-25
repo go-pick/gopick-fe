@@ -5,6 +5,18 @@ const API_URL = process.env.REACT_APP_API_URL;
 // axios 인스턴스 생성
 const apiClient = axios.create({
 	baseURL: API_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    withCredentials: true,
+});
+
+apiClient.interceptors.request.use((config) => {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+        config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+    return config;
 });
 
 // 아이디 중복 확인 로직
@@ -51,4 +63,29 @@ const getUsername = async (token) => {
     }
 };
 
-export { checkUsername, signup, apiLogin, getUsername };
+const requestPasswordResetEmail = async (email) => {
+    const response = await apiClient.post('/auth/password-reset/request', {
+        email: email
+    });
+    return response.data;
+};
+
+const confirmPasswordReset = async (token, newPassword) => {
+    const response = await apiClient.post('/auth/password-reset/confirm', {
+        password: newPassword
+    },{
+        headers: {
+            Authorization: `Bearer ${token}` // 수동으로 토큰 주입
+        }
+    });
+    return response.data;
+};
+
+export { 
+    checkUsername, 
+    signup, 
+    apiLogin, 
+    getUsername, 
+    requestPasswordResetEmail,
+    confirmPasswordReset,
+};

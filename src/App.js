@@ -17,6 +17,7 @@ import MyPageLayout from './features/mypage/MyPageLayout';
 import HistoryPage from './features/mypage/pages/HistoryPage';
 import ChangePasswordPage from './features/mypage/pages/ChangePasswordPage';
 import ChangeEmailPage from './features/mypage/pages/ChangeEmailPage';
+import PasswordUpdatePage from './features/mypage/pages/PasswordUpdatePage';
 
 function AppContent() {
 	const { themeMode } = useTheme();
@@ -49,7 +50,7 @@ function AppContent() {
 								<Route path='history' element={<HistoryPage />} />
 								<Route path='password' element={<ChangePasswordPage />} />
 								<Route path='email' element={<ChangeEmailPage />} />
-								
+								<Route path="update-password" element={<PasswordUpdatePage />} />
 
 							</Route>
 						</Routes>

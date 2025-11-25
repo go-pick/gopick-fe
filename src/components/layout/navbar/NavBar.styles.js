@@ -10,6 +10,7 @@ S.NavContainer = styled.nav`
     height: 60px;
     background-color: ${({ theme }) => theme.main.regular};
     z-index: 100;
+    box-shadow: 0 4px 12px ${({ theme }) => theme.shadow};
 `;
 
 S.MenuWrapper = styled.div`
