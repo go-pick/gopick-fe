@@ -18,6 +18,7 @@ import HistoryPage from './features/mypage/pages/HistoryPage';
 import ChangePasswordPage from './features/mypage/pages/ChangePasswordPage';
 import ChangeEmailPage from './features/mypage/pages/ChangeEmailPage';
 import PasswordUpdatePage from './features/mypage/pages/PasswordUpdatePage';
+import ComparePage from './features/compare/ComparePage';
 
 function AppContent() {
 	const { themeMode } = useTheme();
@@ -35,7 +36,8 @@ function AppContent() {
 							<Route path='/' element={<MainPage />} />
 							<Route path='/login' element={<LoginPage />} />
 							<Route path='/signup' element={<SignupPage />} />
-	
+							<Route path='/compare' element={<ComparePage />} />
+							
 							<Route path="/verify-email" element={<VerifyEmailPage />} />
 							
 							<Route

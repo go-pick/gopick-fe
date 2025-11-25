@@ -81,6 +81,17 @@ const confirmPasswordReset = async (token, newPassword) => {
     return response.data;
 };
 
+const getCategories = async () => {
+    try {
+        // 백엔드 엔드포인트: GET /categories 라고 가정
+        const response = await apiClient.get('/categories');
+        return response.data; // 백엔드에서 [{slug:..., name:...}, ...] 형태의 배열을 반환해야 함
+    } catch (error) {
+        console.error("Failed fetch Categories: ", error.response?.data?.error || error.message);
+        throw new Error(error.response?.data?.error || '카테고리 목록을 불러오는데 실패했습니다.');
+    }
+};
+
 export { 
     checkUsername, 
     signup, 
@@ -88,4 +99,5 @@ export {
     getUsername, 
     requestPasswordResetEmail,
     confirmPasswordReset,
+    getCategories,
 };

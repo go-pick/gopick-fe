@@ -54,20 +54,20 @@ const MyPageLayout = () => {
 	useEffect(() => {
 		let timer;
 		
-        if (isMasterExpanded) {		// 호버 시
+		if (isMasterExpanded) {		// 호버 시
 			setIsPaddingExpanded(true);
 			
-            timer = setTimeout(() => {
+			timer = setTimeout(() => {
 				setIsGridExpanded(true); 
-                setIsUiExpanded(true);
-            }, ANIMATION_DURATION_MS);
+				setIsUiExpanded(true);
+			}, ANIMATION_DURATION_MS);
 			
         } else {					// 호버 해제 시
-            setIsUiExpanded(false); 
+			setIsUiExpanded(false); 
 			setIsGridExpanded(false);
-            timer = setTimeout(() => {
+			timer = setTimeout(() => {
 				setIsPaddingExpanded(false);
-            }, ANIMATION_DURATION_MS);
+			}, ANIMATION_DURATION_MS);
         }
 		
         return () => clearTimeout(timer);
@@ -79,8 +79,8 @@ const MyPageLayout = () => {
 	const contentColSpan = 1;
 
 	const gtc = isGridExpanded
-        ? "1fr 3fr 7fr 1fr"
-        : "1fr 1fr 9fr 1fr"
+		? "1fr 3fr 7fr 1fr"
+		: "1fr 1fr 9fr 1fr"
 	;
 	
 	return (
