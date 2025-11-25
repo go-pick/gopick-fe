@@ -106,6 +106,7 @@ const PasswordUpdatePage = () => {
 
 	return (
 		<S.ContentWrapper>
+			<S.SubTitle>비밀번호 변경하기</S.SubTitle>
 			<S.SubContentContainer>
 				<S.SubDescription>
 					새 비밀번호 설정

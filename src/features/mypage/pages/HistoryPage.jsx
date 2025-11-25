@@ -4,7 +4,10 @@ import S from '../MyPage.styles';
 const HistoryPage = () => {
 	return (
 		<S.ContentWrapper>
-			기록보기
+			<S.SubTitle>기록 보기</S.SubTitle>
+			<S.SubContentContainer>
+
+			</S.SubContentContainer>
 		</S.ContentWrapper>
 	);
 };

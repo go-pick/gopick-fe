@@ -28,7 +28,7 @@ const ChangePasswordPage = () => {
 	
 	return (
 		<S.ContentWrapper>
-			<S.SubTitle>비밀번호 변경</S.SubTitle>
+			<S.SubTitle>비밀번호 변경하기</S.SubTitle>
 			{ !isSent ? (
 				<S.SubContentContainer>
 					<S.SubDescription>
