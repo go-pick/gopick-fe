@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 // axios 인스턴스 생성
 const apiClient = axios.create({
-	baseURL: API_URL,
+    baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
     },
@@ -19,16 +19,20 @@ apiClient.interceptors.request.use((config) => {
     return config;
 });
 
+/* -------------------------------------------------------------------------- */
+/* Auth Related                                */
+/* -------------------------------------------------------------------------- */
+
 // 아이디 중복 확인 로직
 const checkUsername = (username) => {
-	return apiClient.get(`/auth/check-username`, {
-		params: { username }
-	});
+    return apiClient.get(`/auth/check-username`, {
+        params: { username }
+    });
 };
 
 // 회원가입 요청
 const signup = (userData) => {
-	return apiClient.post(`/auth/signup`, userData);
+    return apiClient.post(`/auth/signup`, userData);
 };
 
 const apiLogin = async (email, password) => {
@@ -81,14 +85,45 @@ const confirmPasswordReset = async (token, newPassword) => {
     return response.data;
 };
 
+/* -------------------------------------------------------------------------- */
+/* Product Related                               */
+/* -------------------------------------------------------------------------- */
+
 const getCategories = async () => {
     try {
-        // 백엔드 엔드포인트: GET /categories 라고 가정
         const response = await apiClient.get('/categories');
-        return response.data; // 백엔드에서 [{slug:..., name:...}, ...] 형태의 배열을 반환해야 함
+        return response.data; 
     } catch (error) {
         console.error("Failed fetch Categories: ", error.response?.data?.error || error.message);
         throw new Error(error.response?.data?.error || '카테고리 목록을 불러오는데 실패했습니다.');
+    }
+};
+
+// [New] 제품 검색 API
+const searchProducts = async (query, categorySlug) => {
+    try {
+        // GET /products/search?q=...&category=...
+        const response = await apiClient.get('/products/search', {
+            params: {
+                q: query,
+                category: categorySlug
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Failed search products: ", error.response?.data?.error || error.message);
+        throw new Error('제품 검색에 실패했습니다.');
+    }
+};
+
+const getProductVariants = async (productId) => {
+    try {
+        // GET /products/:id/variants
+        const response = await apiClient.get(`/products/${productId}/variants`);
+        return response.data;
+    } catch (error) {
+        console.error("Failed fetch variants: ", error.response?.data?.error || error.message);
+        throw new Error('제품 옵션 정보를 불러오는데 실패했습니다.');
     }
 };
 
@@ -100,4 +135,6 @@ export {
     requestPasswordResetEmail,
     confirmPasswordReset,
     getCategories,
+    searchProducts,
+    getProductVariants
 };

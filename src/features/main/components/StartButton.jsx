@@ -20,7 +20,7 @@ const StyledStartButton = styled(Link)`
 
 const StartButton = () => {
     return (
-        <StyledStartButton>
+        <StyledStartButton to={'/compare'}>
             지금 바로 비교하기
         </StyledStartButton>
     );

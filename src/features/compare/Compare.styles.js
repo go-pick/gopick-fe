@@ -9,14 +9,14 @@ S.PageContainer = styled.div`
 
 S.StickySidebarWrapper = styled.aside`
     position: sticky;
-    top: 80px; /* 상단에서 40px 떨어진 위치에 고정 */
+    top: 80px;
     width: 100%;
     
     /* 스타일링 */
     background-color: transparent;
-    padding: 24px;
     border-radius: 30px;
     border: 1px solid ${({ theme }) => theme.gray.regular};
+    overflow: hidden;
 `;
 
 S.ContentListWrapper = styled.main`
@@ -26,6 +26,16 @@ S.ContentListWrapper = styled.main`
     width: 100%;
     border-radius: 30px;
     border: 1px solid ${({ theme }) => theme.gray.regular};
+    overflow: hidden;
+`;
+
+S.SubTitle = styled.div`
+    border-bottom: 1px solid ${({ theme }) => theme.gray.regular};
+    height: 4rem;
+    line-height: 4rem;
+    padding: 0 2rem;
+    font-size: 1.2rem;
+    text-align: center;
 `;
 
 export default S;

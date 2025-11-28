@@ -4,7 +4,7 @@ import { InfoCircleFill } from 'react-bootstrap-icons'; // 부트스트랩 아�
 import { getCategories } from '../../../api/api'; // API 경로 확인 필요
 import { Button } from '../../../components/common';
 
-const CategorySelectModal = ({ onSelectCategory }) => {
+const CategorySelectModal = ({ onSelect }) => {
 	const [categories, setCategories] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	
@@ -41,9 +41,18 @@ const CategorySelectModal = ({ onSelectCategory }) => {
 	// 확인 버튼 클릭 핸들러 (최종 확정)
 	const handleConfirm = () => {
 		if (tempSelected) {
-		onSelectCategory(tempSelected);
+			// 1. 현재 선택된 slug와 일치하는 전체 카테고리 객체를 찾는다.
+			const selectedCategoryObj = categories.find(c => c.slug === tempSelected);
+
+			if (selectedCategoryObj) {
+				// 2. 부모에게 { slug, name } 형태로 전달
+				onSelect({
+					slug: selectedCategoryObj.slug,
+					name: selectedCategoryObj.name
+				});
+			}
 		} else {
-		alert("카테고리를 선택해주세요.");
+			alert("카테고리를 선택해주세요.");
 		}
 	};
 
