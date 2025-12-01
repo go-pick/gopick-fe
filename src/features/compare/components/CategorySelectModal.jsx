@@ -47,8 +47,10 @@ const CategorySelectModal = ({ onSelect }) => {
 			if (selectedCategoryObj) {
 				// 2. 부모에게 { slug, name } 형태로 전달
 				onSelect({
+					id: selectedCategoryObj.id,
 					slug: selectedCategoryObj.slug,
-					name: selectedCategoryObj.name
+					name: selectedCategoryObj.name,
+					specs: selectedCategoryObj.specs,
 				});
 			}
 		} else {
@@ -114,11 +116,11 @@ export default CategorySelectModal;
 // --- Styled Components ---
 
 const Overlay = styled.div`
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex; justify-content: center; align-items: center;
-  z-index: 1000;
+	position: fixed;
+	top: 0; left: 0; width: 100%; height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex; justify-content: center; align-items: center;
+	z-index: 1000;
 `;
 
 const ModalContainer = styled.div`
@@ -141,7 +143,7 @@ const ModalHeader = styled.div`
 		color: white;
 		font-size: 1.4rem;
 		font-weight: 700;
-  }
+	}
 `;
 
 const ModalBody = styled.div`
@@ -159,21 +161,21 @@ const RadioGroup = styled.div`
 `;
 
 const RadioLabel = styled.label`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 10px 12px;
-  border-radius: 8px;
-  transition: background-color 0.2s;
-  background-color: ${({ isSelected, theme }) => isSelected ? theme.backgroundSub : 'transparent'};
-  
-  &:hover {
-    background-color: ${({ theme }) => theme.backgroundSub};
-  }
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	padding: 10px 12px;
+	border-radius: 8px;
+	transition: background-color 0.2s;
+	background-color: ${({ isSelected, theme }) => isSelected ? theme.backgroundSub : 'transparent'};
+	
+	&:hover {
+		background-color: ${({ theme }) => theme.backgroundSub};
+	}
 `;
 
 const RadioInput = styled.input`
-  display: none;
+  	display: none;
 `;
 
 const CustomRadio = styled.div`
