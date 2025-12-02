@@ -15,6 +15,7 @@ const lightTheme = {
 	text: basicColors.black,
 	textSub: grayColors.regular,
 	textBox: '#202020',
+	icon: grayColors.deepen,
 	shadow: 'rgba(0, 0, 0, 0.15)',
 };
 
@@ -25,6 +26,7 @@ const darkTheme = {
 	text: basicColors.white,
 	textSub: grayColors.darken,
 	textBox: '#ffffff',
+	icon: grayColors.lighten,
 	shadow: 'rgba(255, 255, 255, 0.1)',
 }
 

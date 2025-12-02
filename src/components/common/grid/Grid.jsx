@@ -21,8 +21,9 @@ const GridItem = styled.div`
     grid-column-end: span ${props => props.colSpan || 1};
 
     display: flex;
-    justify-content: center;
-    align-items: ${props => props.align || 'center'};
+    flex-direction: column;
+    justify-content: ${props => props.align || 'center'};
+    align-items: center;
     height: ${props => props.height || '100%'};
 `;
 

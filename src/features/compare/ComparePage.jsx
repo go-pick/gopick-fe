@@ -7,6 +7,9 @@ import WeightConfigurator from './components/WeightConfigurator';
 import WeightConfigPlaceholder from './components/WeightConfigPlaceholder';
 import ProductSearchModal from './components/ProductSearchModal';
 import { useNavigate } from 'react-router-dom';
+import { calculateRanking } from '../../api/api';
+import { Button } from '../../components/common';
+import { head } from 'lodash';
 
 const ComparePage = () => {
 	const navigate = useNavigate();
@@ -17,9 +20,22 @@ const ComparePage = () => {
 	const [selectedProducts, setSelectedProducts] = useState([]);
 	const [weights, setWeights] = useState({});
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	// 카테고리 변경 (초기화)
 	const handleCategorySelect = (selectedData) => {
-        setCategoryInfo(selectedData);
+		const priceSpecDefinition = {
+            eng_name: 'price', 
+            kor_name: '가격',
+            unit: '₩',
+            is_positive: false
+        };
+
+		const mergedSpecs = [priceSpecDefinition, ...selectedData.specs];
+        setCategoryInfo({
+            ...selectedData,
+            specs: mergedSpecs
+        });
         setSelectedProducts([]); // 초기화
         setWeights({});
     };
@@ -32,7 +48,7 @@ const ComparePage = () => {
 		setIsSearchModalOpen(false);
 	};
 
-    // [수정 2] 모달에서 선택한 데이터 처리 로직 수정
+    //모달에서 선택한 데이터 처리 로직 수정
 	const handleSelectProduct = (product) => {
         const isExist = selectedProducts.find(p => p.unique_id === product.unique_id);
         if (isExist) {
@@ -49,23 +65,46 @@ const ComparePage = () => {
 		setSelectedProducts(prev => prev.filter(p => p.unique_id !== uniqueId));
 	};
 
-	const handleCompareStart = () => {
+	const handleCompareStart = async () => {
+        // 유효성 검사
         if (selectedProducts.length < 2) {
             alert("최소 2개 이상의 제품을 선택해야 비교할 수 있습니다.");
             return;
         }
 
-        // [페이지 이동] 모은 데이터를 가지고 결과 페이지로 이동
-        navigate('/compare/result', { 
-            state: { 
-                products: selectedProducts, 
-                weights: weights,
-                specDefinitions: categoryInfo.specs // 계산에 필요한 공식(unit, is_positive 등) 전달
-            } 
-        });
+        setIsLoading(true);
+
+        try {
+            // 백엔드로 보낼 데이터 준비
+            const payload = {
+                categoryId: categoryInfo.id, // 카테고리 ID (스펙 정의 조회용)
+                selectedVariantIds: selectedProducts.map(p => p.unique_id), // 제품 ID들
+                weights: weights // 사용자가 설정한 가중치
+            };
+
+            // API 호출 (계산 요청)
+            const { rankedData, specDefinitions } = await calculateRanking(payload);
+            
+            // 성공 시 결과 페이지로 이동
+            // state에 데이터를 담아 보내면 URL이 지저분해지지 않고 데이터만 전달됩니다.
+            navigate('/compare/result', { 
+                state: { 
+                    rankedData: rankedData,       // 서버가 계산해준 순위 데이터
+                    specDefinitions: specDefinitions // 결과 표 헤더를 그리기 위한 정보
+                } 
+            });
+
+        } catch (error) {
+            console.error("비교 계산 실패:", error);
+            alert("점수 산출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        } finally {
+            // 6. 로딩 종료
+            setIsLoading(false);
+        }
     };
 
 	const gridTemplate = "repeat(12, 1fr)";
+	const isConfigurable = selectedProducts.length >= 2;
 
 	return (
 		<S.PageContainer>
@@ -108,6 +147,15 @@ const ComparePage = () => {
 							/>
 						)}
 					</S.ContentListWrapper>
+					<div style={{height: "2rem"}}></div>
+					<Button
+						onClick={handleCompareStart}
+						disabled={!isConfigurable || isLoading}
+						variant='solid'
+						style={{height: '4rem'}}
+					>
+						비교하기
+					</Button>
 				</GridItem>
 			</GridContainer>
 		</S.PageContainer>

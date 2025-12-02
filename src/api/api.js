@@ -127,6 +127,16 @@ const getProductVariants = async (productId) => {
     }
 };
 
+const calculateRanking = async (payload) => {
+    try {
+        const response = await apiClient.post('/products/calculate', payload);
+        return response.data;
+    } catch (error) {
+        console.error("Failed calculate ranking: ", error.response?.data?.error || error.message);
+        throw new Error('랭킹 분석에 실패했습니다.');
+    }
+};
+
 export { 
     checkUsername, 
     signup, 
@@ -136,5 +146,6 @@ export {
     confirmPasswordReset,
     getCategories,
     searchProducts,
-    getProductVariants
+    getProductVariants,
+    calculateRanking
 };

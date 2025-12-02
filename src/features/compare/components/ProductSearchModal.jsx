@@ -226,7 +226,7 @@ const SelectedProductSummary = styled.div`
 	align-items: center;
 	gap: 16px;
 	padding-bottom: 20px;
-	border-bottom: 1px solid ${({ theme }) => theme.main.lighten};
+	border-bottom: 1px solid ${({ theme }) => theme.gray.regular};
 `;
 
 const SummaryImage = styled.div`

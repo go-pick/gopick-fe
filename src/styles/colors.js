@@ -6,8 +6,10 @@ const mainColors = {
 };
 
 const grayColors = {
+	lighten: '#DDE1E9',
 	regular: '#9B9BB2',
 	darken: '#8787A0',
+	deepen: '#4D4D5F'
 };
 
 const basicColors = {

@@ -61,7 +61,7 @@ const WeightConfigurator = ({ specDefinitions = [], onWeightChange }) => {
                         
                         <Label>
                             {spec.kor_name} 
-                            {spec.unit && <Unit>({spec.unit})</Unit>}
+                            {spec.unit && <Unit>{spec.unit}</Unit>}
                         </Label>
                         
                         <StarContainer>
@@ -97,7 +97,7 @@ const WeightConfigurator = ({ specDefinitions = [], onWeightChange }) => {
                                         <span className="name">{spec.kor_name}</span>
                                         {spec.unit && <span className="unit">{spec.unit}</span>}
                                     </div>
-                                    <Plus size={20} className="add-icon"/>
+                                    <Plus size={22} className="add-icon"/>
                                 </DrawerItem>
                             ))
                         ) : (
@@ -162,14 +162,17 @@ const Label = styled.span`
     font-weight: 500;
     display: flex; 
     align-items: center; 
-    gap: 4px;
+    gap: 6px;
 	padding: 0 0.5rem;
 `;
 
 const Unit = styled.span` 
-    font-size: 12px; 
-    color: ${({ theme }) => theme.textSub}; 
-    font-weight: 400; 
+	font-size: 11px; 
+	color: ${({ theme }) => theme.textSub}; 
+	background-color: ${({ theme }) => theme.backgroundSub}; // 배경색 추가
+	padding: 2px 6px; // 안쪽 여백
+	border-radius: 4px; // 둥근 모서리
+	font-weight: 400;
 `;
 
 const StarContainer = styled.div` display: flex; gap: 6px; `;
@@ -206,9 +209,10 @@ const ToggleHeader = styled.button`
     transition: background 0.2s;
 
     span {
-        font-size: 15px;
+        font-size: 1rem;
         color: ${({ theme }) => theme.text};
-        font-weight: 500;
+        font-weight: 4
+		00;
     }
 
     &:hover {
@@ -242,7 +246,7 @@ const DrawerList = styled.div`
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 	height: auto;
     
     &::-webkit-scrollbar { width: 4px; }
@@ -272,7 +276,7 @@ const DrawerItem = styled.button`
     }
 
     .name { 
-        font-size: 14px; 
+        font-size: 15px; 
         color: ${({ theme }) => theme.text}; 
         font-weight: 500; 
     }
