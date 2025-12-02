@@ -1,30 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import S from '../MyPage.styles';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { confirmPasswordReset, requestPasswordResetEmail } from '../../../api/api';
 import { supabase } from '../../../supabaseClient';
-import { Button, TextBox } from '../../../components/common';
+import { Button } from '../../../components/common';
 
 const ChangePasswordPage = () => {
 	const [isSent, setIsSent] = useState(false);
 
-    const handleSendVerification = async () => {
-        try {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (!user) return alert("로그인 정보가 없습니다.");
+	const handleSendVerification = async () => {
+		try {
+			const { data: { user } } = await supabase.auth.getUser();
+			if (!user) return alert("로그인 정보가 없습니다.");
 
-            // [핵심] 리다이렉트 주소를 '새로 만든 페이지'로 지정합니다.
-            const { error } = await supabase.auth.resetPasswordForEmail(user.email, {
-                redirectTo: 'http://localhost:3000/mypage/update-password', 
-            });
+			// [핵심] 리다이렉트 주소를 '새로 만든 페이지'로 지정합니다.
+			const { error } = await supabase.auth.resetPasswordForEmail(user.email, {
+				redirectTo: 'http://localhost:3000/mypage/update-password', 
+			});
 
-            if (error) throw error;
-            setIsSent(true);
-        } catch (error) {
-            console.error(error);
-            alert('메일 발송 실패: ' + error.message);
-        }
-    };
+			if (error) throw error;
+			setIsSent(true);
+		} catch (error) {
+			console.error(error);
+			alert('메일 발송 실패: ' + error.message);
+		}
+	};
 	
 	return (
 		<S.ContentWrapper>

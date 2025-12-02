@@ -133,7 +133,41 @@ const calculateRanking = async (payload, token) => {
     }
 };
 
+/* -------------------------------------------------------------------------- */
+/* Hstory Related                               */
+/* -------------------------------------------------------------------------- */
+
+const getHistoryList = async (token) => {
+	try {
+		const response = await apiClient.get('/history', {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
+		return response.data;
+	} catch (error) {
+		console.error("Failed fetch history list: ", error);
+		throw error;
+	}
+};
+
+const getHistoryDetail = async (id, token) => {
+	try {
+		const response = await apiClient.get(`/history/${id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
+		return response.data;
+	} catch (error) {
+		console.error("Failed fetch history detail: ", error);
+		throw error;
+	}
+};
+
 export { 
+    getHistoryDetail,
+    getHistoryList,
     checkUsername, 
     signup, 
     apiLogin, 
