@@ -89,8 +89,9 @@ const ComparePage = () => {
             // state에 데이터를 담아 보내면 URL이 지저분해지지 않고 데이터만 전달됩니다.
             navigate('/compare/result', { 
                 state: { 
-                    rankedData: rankedData,       // 서버가 계산해준 순위 데이터
-                    specDefinitions: specDefinitions // 결과 표 헤더를 그리기 위한 정보
+                    rankedData: rankedData,
+                    specDefinitions: specDefinitions,
+					weights: weights
                 } 
             });
 

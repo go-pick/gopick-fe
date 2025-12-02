@@ -9,12 +9,19 @@ const CompareResultPage = () => {
 	const navigate = useNavigate();
 	
 	// 1. 이전 페이지(ComparePage)에서 보낸 데이터 받기
-	const { rankedData, specDefinitions } = location.state || {};
+	const { rankedData, specDefinitions, weights } = location.state || {};
 
 	// 2. 데이터 없이 직접 URL로 접근했을 때 튕겨내기 (보안)
 	if (!rankedData || !specDefinitions) {
 		return <Navigate to="/compare" replace={true} />;
 	}
+
+	const prioritySpecs = specDefinitions.filter(spec => 
+        spec.eng_name !== 'price' && weights && weights[spec.eng_name] > 0
+    );
+	const otherSpecs = specDefinitions.filter(spec => 
+        spec.eng_name !== 'price' && (!weights || !weights[spec.eng_name])
+    );
 
 	// 4. 값 표시 헬퍼 함수
 	// 가격 콤마, 해상도 객체 처리 등을 담당
@@ -32,6 +39,33 @@ const CompareResultPage = () => {
 		// 일반 값
 		return value;
 	};
+
+	const RenderSpecGrid = ({ specs }) => (
+        <>
+            {specs.map(spec => (
+                <React.Fragment key={spec.eng_name}>
+                    <ProductGrid $count={rankedData.length} style={{marginTop: '30px'}}>
+                        {rankedData.map(p => {
+							const value = p.specs[spec.eng_name]
+                            return (
+                                <SpecCell key={p.unique_id}>
+                                    <IconWrapper>
+                                        {getSpecIcon(spec.icon_key || spec.eng_name)}
+                                    </IconWrapper>
+                                    <SpecValue>
+                                        {renderSpecValue(spec.eng_name, value)}
+                                        <Unit>{spec.unit}</Unit>
+                                    </SpecValue>
+                                    {/* 스펙 이름 추가 (선택 사항) */}
+                                    <SpecLabel>{spec.kor_name}</SpecLabel>
+                                </SpecCell>
+                            );
+                        })}
+                    </ProductGrid>
+                </React.Fragment>
+            ))}
+        </>
+    );
 
 	return (
 		<Container>
@@ -72,27 +106,33 @@ const CompareResultPage = () => {
 
                 {/* [섹션 2] 상세 스펙 리스트 (통합 루프) */}
 				<SpecContainer>
-					{specDefinitions.map(spec => (
-						<React.Fragment key={spec.eng_name}>
-							{/* 각 스펙마다 한 줄씩(ProductGrid) 생성 */}
-							<ProductGrid $count={rankedData.length} style={{marginTop: '30px'}}>
-								{rankedData.map(p => (
-									<SpecCell key={p.unique_id}>
-										<IconWrapper>
-											{getSpecIcon(spec.icon_key || spec.eng_name)}
-										</IconWrapper>
-										
-										<SpecValue>
-											{renderSpecValue(spec.eng_name, p.specs[spec.eng_name])}
-											{spec.eng_name !== 'price' && <Unit>{spec.unit}</Unit>}
-										</SpecValue>
+					<ProductGrid $count={rankedData.length}>
+						{rankedData.map(p => (
+							<SpecCell key={p.unique_id}>
+								{getSpecIcon('price')}
+								<SpecValue>
+									{p.price ? Number(p.price).toLocaleString() : '-'}
+								</SpecValue>
+								<SpecLabel>가격</SpecLabel>
+							</SpecCell>
+						))}
+					</ProductGrid>
 
-										<SpecLabel>{spec.kor_name}</SpecLabel>
-									</SpecCell>
-								))}
-							</ProductGrid>
-						</React.Fragment>
-					))}
+					{prioritySpecs.length > 0 && (
+                        <>
+                            {/* <SectionDivider />  */}
+                            {/* <SectionTitle $highlight>⭐ 핵심 비교 항목</SectionTitle> */}
+                            <RenderSpecGrid specs={prioritySpecs} />
+                        </>
+                    )}
+					<Divider />
+					{otherSpecs.length > 0 && (
+                        <>
+                            {/* <SectionDivider />
+                            <SectionTitle>기타 스펙</SectionTitle> */}
+                            <RenderSpecGrid specs={otherSpecs} />
+                        </>
+                    )}
 				</SpecContainer>
 
 			</ContentBox>
