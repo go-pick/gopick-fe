@@ -10,9 +10,11 @@ import { useNavigate } from 'react-router-dom';
 import { calculateRanking } from '../../api/api';
 import { Button } from '../../components/common';
 import { head } from 'lodash';
+import { useAuth } from '../../contexts/AuthContext';
 
 const ComparePage = () => {
 	const navigate = useNavigate();
+	const { session } = useAuth();
 
 	const [categoryInfo, setCategoryInfo] = useState(null);
 	const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
@@ -81,9 +83,9 @@ const ComparePage = () => {
                 selectedVariantIds: selectedProducts.map(p => p.unique_id), // 제품 ID들
                 weights: weights // 사용자가 설정한 가중치
             };
-
+			
             // API 호출 (계산 요청)
-            const { rankedData, specDefinitions } = await calculateRanking(payload);
+            const { rankedData, specDefinitions } = await calculateRanking(payload, session?.access_token);
             
             // 성공 시 결과 페이지로 이동
             // state에 데이터를 담아 보내면 URL이 지저분해지지 않고 데이터만 전달됩니다.

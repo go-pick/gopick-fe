@@ -11,14 +11,6 @@ const apiClient = axios.create({
     withCredentials: true,
 });
 
-apiClient.interceptors.request.use((config) => {
-    const accessToken = localStorage.getItem('access_token');
-    if (accessToken) {
-        config.headers['Authorization'] = `Bearer ${accessToken}`;
-    }
-    return config;
-});
-
 /* -------------------------------------------------------------------------- */
 /* Auth Related                                */
 /* -------------------------------------------------------------------------- */
@@ -79,7 +71,7 @@ const confirmPasswordReset = async (token, newPassword) => {
         password: newPassword
     },{
         headers: {
-            Authorization: `Bearer ${token}` // 수동으로 토큰 주입
+            Authorization: `Bearer ${token}`
         }
     });
     return response.data;
@@ -127,9 +119,13 @@ const getProductVariants = async (productId) => {
     }
 };
 
-const calculateRanking = async (payload) => {
+const calculateRanking = async (payload, token) => {
     try {
-        const response = await apiClient.post('/products/calculate', payload);
+        const response = await apiClient.post('/products/calculate', payload, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error("Failed calculate ranking: ", error.response?.data?.error || error.message);

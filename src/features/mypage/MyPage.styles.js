@@ -3,8 +3,9 @@ import styled from "styled-components";
 const S = {};
 
 S.PageContainer = styled.div`
-	padding: 2rem 0;
+	padding: 3rem 0;
 	width: 100vw;
+	min-height: 100vh;
 `;
 
 S.Title = styled.h1`
