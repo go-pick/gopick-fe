@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/gopick-fe/static/css/main.e6c13ad2.css",
-    "main.js": "/gopick-fe/static/js/main.9719abbd.js",
+    "main.js": "/gopick-fe/static/js/main.de0da7a8.js",
     "static/js/453.16736442.chunk.js": "/gopick-fe/static/js/453.16736442.chunk.js",
     "index.html": "/gopick-fe/index.html",
     "main.e6c13ad2.css.map": "/gopick-fe/static/css/main.e6c13ad2.css.map",
-    "main.9719abbd.js.map": "/gopick-fe/static/js/main.9719abbd.js.map",
+    "main.de0da7a8.js.map": "/gopick-fe/static/js/main.de0da7a8.js.map",
     "453.16736442.chunk.js.map": "/gopick-fe/static/js/453.16736442.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.9719abbd.js"
+    "static/js/main.de0da7a8.js"
   ]
 }
