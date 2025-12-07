@@ -21,6 +21,7 @@ S.ContentWrapper = styled.div`
 	border: 1px solid ${({ theme }) => theme.gray.regular};
 	width: 100%;
 	min-height: 70vh; // 최소 높이
+	overflow: hidden;
 
 	transition: all 0.3s ease-in-out;
 `;

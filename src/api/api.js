@@ -137,18 +137,21 @@ const calculateRanking = async (payload, token) => {
 /* Hstory Related                               */
 /* -------------------------------------------------------------------------- */
 
-const getHistoryList = async (token) => {
-	try {
-		const response = await apiClient.get('/history', {
-			headers: {
-				Authorization: `Bearer ${token}`
-			}
-		});
-		return response.data;
-	} catch (error) {
-		console.error("Failed fetch history list: ", error);
-		throw error;
-	}
+const getHistoryList = async (token, page = 1, limit = 10) => {
+    const response = await apiClient.get('/history', {
+        // 1. 쿼리 파라미터 (자동으로 /history?page=x&limit=y 로 변환됨)
+        params: {
+            page: page,
+            limit: limit
+        },
+        // 2. 헤더 설정 (로그인 토큰)
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    // 백엔드 응답 구조: { list:Array, totalCount:Number }
+    return response.data;
 };
 
 const getHistoryDetail = async (id, token) => {
