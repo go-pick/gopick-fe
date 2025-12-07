@@ -135,7 +135,6 @@ const HistoryDetailPage = () => {
                 <DetailContainer $isOpen={isDetailOpen}>
                     <DetailContent>
                         {/* 가격 정보 (맨 위 고정) */}
-                        <DetailRowTitle>기본 정보</DetailRowTitle>
                         <ProductGrid $count={rankedData.length} style={{marginBottom: '30px'}}>
                             {rankedData.map(p => (
                                 <SpecCell key={p.unique_id}>
