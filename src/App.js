@@ -19,7 +19,6 @@ import ChangeEmailPage from './features/mypage/pages/ChangeEmailPage';
 import PasswordUpdatePage from './features/mypage/pages/PasswordUpdatePage';
 import ComparePage from './features/compare/ComparePage';
 import CompareResultPage from './features/compare/CompareResultPage';
-import HistoryDetailPage from './features/mypage/pages/HistoryDetailPage';
 
 function AppContent() {
 	const { themeMode } = useTheme();
@@ -52,7 +51,6 @@ function AppContent() {
 							>
 								<Route index element={<Navigate to="/mypage/history" replace />} />
 								<Route path='history' element={<HistoryPage />} />
-								<Route path="history/:id" element={<HistoryDetailPage />} />
 								<Route path='password' element={<ChangePasswordPage />} />
 								<Route path='email' element={<ChangeEmailPage />} />
 								<Route path="update-password" element={<PasswordUpdatePage />} />
