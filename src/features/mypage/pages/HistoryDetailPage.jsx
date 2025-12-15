@@ -225,24 +225,30 @@ const StarWrapper = styled.div` display: flex; gap: 2px; `;
 
 /* 토글 및 상세 컨테이너 */
 const ToggleButton = styled.button`
-    width: 100%; padding: 16px; background-color: transparent;
+    width: 100%;
+    padding: 16px;
+	background-color: transparent;
     border: 1px solid ${({ theme }) => theme.gray.regular};
-    border-radius: 12px; color: ${({ theme }) => theme.text};
-    font-weight: 600; cursor: pointer;
+    border-radius: 12px;
+    color: ${({ theme }) => theme.text};
+    font-weight: 600;
+    cursor: pointer;
     display: flex; justify-content: center; align-items: center; gap: 8px;
     transition: all 0.2s;
+
     &:hover { background-color: ${({ theme }) => theme.backgroundSub}; }
 `;
 
 const DetailContainer = styled.div`
     overflow: hidden;
-    max-height: ${props => props.$isOpen ? '2000px' : '0'};
+    max-height: ${props => props.$isOpen ? '2000px' : '0'}; /* 넉넉하게 */
     opacity: ${props => props.$isOpen ? '1' : '0'};
     transition: all 0.4s ease-in-out;
     background-color: #fff;
     border: 1px solid ${({ theme }) => theme.gray.regular};
     border-top: none;
-    border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 `;
 const DetailContent = styled.div` padding: 30px 0; `;
 const DetailRowTitle = styled.div` text-align: center; font-size: 0.85rem; color: #adb5bd; margin-bottom: 20px; font-weight: 700; `;
