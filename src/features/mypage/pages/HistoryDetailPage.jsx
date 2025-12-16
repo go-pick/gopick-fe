@@ -187,8 +187,17 @@ const Header = styled.div`
 `;
 const BackButton = styled.button`
     background: none; border: none; display: flex; align-items: center; gap: 6px;
-    font-size: 14px; color: #868e96; cursor: pointer; &:hover { color: #333; }
+    font-size: 14px;
+	color: ${({ theme }) => theme.gray.regular};
+	cursor: pointer;
+	text-decoration: none;
+	&:hover {
+		color: ${({ theme }) => theme.gray.darken};
+		text-decoration: underline;
+	}
 `;
+
+
 const HeaderTitle = styled.div` flex: 1; text-align: center; font-weight: 700; font-size: 1.1rem; padding-right: 60px; `;
 const ContentBody = styled.div` padding: 40px 30px; `;
 
@@ -247,7 +256,7 @@ const DetailContainer = styled.div`
     max-height: ${props => props.$isOpen ? '2000px' : '0'}; /* 넉넉하게 */
     opacity: ${props => props.$isOpen ? '1' : '0'};
     transition: all 0.4s ease-in-out;
-    background-color: #fff;
+    background-color: transparent;
     border: 1px solid ${({ theme }) => theme.gray.regular};
     border-top: none;
     border-bottom-left-radius: 12px;
@@ -258,10 +267,27 @@ const DetailRowTitle = styled.div` text-align: center; font-size: 0.85rem; color
 
 /* 스펙 셀 스타일 */
 const SpecCell = styled.div` display: flex; flex-direction: column; align-items: center; gap: 6px; `;
-const IconWrapper = styled.div` font-size: 24px; color: #333; display: flex; height: 30px; align-items: center; `;
-const SpecValue = styled.div` font-size: 0.95rem; color: #333; font-weight: 500; `;
-const Unit = styled.span` font-size: 0.75rem; color: ${({ theme }) => theme.textSub}; margin-left: 2px; font-weight: 400; `;
-const SpecLabel = styled.div` font-size: 0.75rem; color: #adb5bd; `;
+const IconWrapper = styled.div`
+	font-size: 24px;
+	color: ${({ theme }) => theme.icon};
+	display: flex;
+	height: 30px;
+	align-items: center;
+`;
+
+const SpecValue = styled.div`
+	font-size: 0.95rem;
+	color: ${({ theme }) => theme.text};
+	font-weight: 500;
+`;
+
+const Unit = styled.span`
+	font-size: 0.75rem;
+	color: ${({ theme }) => theme.text};
+	margin-left: 2px; font-weight: 400;
+`;
+
+const SpecLabel = styled.div` font-size: 0.75rem; color: ${({ theme }) => theme.main.regular}; `;
 
 const Divider = styled.hr`
     border: none; border-top: 1px solid ${({ theme }) => theme.gray.regular};
