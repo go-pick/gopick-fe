@@ -27,7 +27,7 @@ function AppContent() {
 	return (
 		<ThemeProvider theme={currentTheme}>
 			<GlobalStyle />
-			<BrowserRouter>
+			<BrowserRouter basename={process.env.PUBLIC_URL}>
 				<AuthProvider>
 					<ScrollToTop />
 					<NavBar />
