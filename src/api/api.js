@@ -108,6 +108,16 @@ const searchProducts = async (query, categorySlug) => {
     }
 };
 
+const getProductDetail = async (productId) => {
+    try {
+        const response = await apiClient.get(`/products/${productId}`);
+        return response.data; 
+    } catch (error) {
+        console.error("Failed fetch product detail: ", error.response?.data?.error || error.message);
+        throw new Error('제품 상세 정보를 불러오는데 실패했습니다.');
+    }
+};
+
 const getProductVariants = async (productId) => {
     try {
         // GET /products/:id/variants
@@ -179,6 +189,7 @@ export {
     confirmPasswordReset,
     getCategories,
     searchProducts,
+    getProductDetail,
     getProductVariants,
     calculateRanking
 };

@@ -20,6 +20,8 @@ import PasswordUpdatePage from './features/mypage/pages/PasswordUpdatePage';
 import ComparePage from './features/compare/ComparePage';
 import CompareResultPage from './features/compare/CompareResultPage';
 import HistoryDetailPage from './features/mypage/pages/HistoryDetailPage';
+import SearchResultPage from './features/search/SearchResultPage';
+import ProductDetailPage from './features/search/ProductDetailPage';
 
 function AppContent() {
 	const { themeMode } = useTheme();
@@ -39,7 +41,8 @@ function AppContent() {
 							<Route path='/signup' element={<SignupPage />} />
 							<Route path='/compare' element={<ComparePage />} />
 							<Route path='/compare/result' element={<CompareResultPage />} />
-							
+							<Route path="/search" element={<SearchResultPage />} />
+							<Route path='/product/:id' element={<ProductDetailPage />} />
 							<Route path="/verify-email" element={<VerifyEmailPage />} />
 							
 							<Route

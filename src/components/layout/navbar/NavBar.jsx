@@ -4,8 +4,15 @@ import LogoButton from './LogoButton';
 import { GridContainer, GridItem } from '../../common/grid/Grid';
 import UserMenu from './UserMenu';
 import SearchBar from '../../common/SearchBar';
+import { useNavigate } from 'react-router-dom';
 
-const NavBar = () => { 
+const NavBar = () => {
+	const navigate = useNavigate();
+
+	const handleSearch = (term) => {
+		if (!term || term.trim() === '') return;
+		navigate(`/search?q=${encodeURIComponent(term)}`)
+	}
 
     return (
         <S.NavContainer>
@@ -24,7 +31,7 @@ const NavBar = () => {
                     </S.MenuWrapper>
                 </GridItem>
                 <GridItem colStart={7} colSpan={3}>
-                    <SearchBar />
+                    <SearchBar onSearch={handleSearch}/>
                 </GridItem>
                 <GridItem colStart={11} colSpan={2}>
                     <UserMenu />
