@@ -138,8 +138,11 @@ const HistoryDetailPage = () => {
                         <ProductGrid $count={rankedData.length} style={{marginBottom: '30px'}}>
                             {rankedData.map(p => (
                                 <SpecCell key={p.unique_id}>
-                                    <SpecLabel>가격</SpecLabel>
+                                    <IconWrapper>
+                                        {getSpecIcon('price')}
+                                    </IconWrapper>
                                     <SpecValue>{renderSpecValue('price', p.price)} 원</SpecValue>
+                                    <SpecLabel>가격</SpecLabel>
                                 </SpecCell>
                             ))}
                         </ProductGrid>
