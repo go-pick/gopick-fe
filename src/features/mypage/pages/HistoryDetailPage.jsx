@@ -223,7 +223,7 @@ const ProductName = styled.div`
 	padding: 0 5px;
 `;
 
-const OptionBadge = styled.span` display: block; font-size: 0.8rem; color: ${({ theme }) = theme.textSub}; font-weight: 400; margin-top: 2px; `;
+const OptionBadge = styled.span` display: block; font-size: 0.8rem; color: ${({ theme }) => theme.textSub}; font-weight: 400; margin-top: 2px; `;
 
 const ScoreBox = styled.div`
     background-color: transparent; padding: 8px 16px; border-radius: 8px; margin-top: 8px;
