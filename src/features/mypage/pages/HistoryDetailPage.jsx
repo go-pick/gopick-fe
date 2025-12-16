@@ -213,8 +213,17 @@ const ImageWrapper = styled.div`
     img { width: 100%; height: 100%; object-fit: contain; }
 `;
 const NoImage = styled.div` color: #ccc; font-size: 12px; `;
-const ProductName = styled.div` font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 8px; line-height: 1.3; padding: 0 5px; `;
-const OptionBadge = styled.span` display: block; font-size: 0.8rem; color: #868e96; font-weight: 400; margin-top: 2px; `;
+
+const ProductName = styled.div`
+	font-size: 1rem; 
+	font-weight: 600; 
+	color: ${({ theme }) => theme.text};
+	margin-bottom: 8px; 
+	line-height: 1.3;
+	padding: 0 5px;
+`;
+
+const OptionBadge = styled.span` display: block; font-size: 0.8rem; color: ${({ theme }) = theme.textSub}; font-weight: 400; margin-top: 2px; `;
 
 const ScoreBox = styled.div`
     background-color: transparent; padding: 8px 16px; border-radius: 8px; margin-top: 8px;
@@ -230,7 +239,11 @@ const PreferenceCard = styled.div`
     border-radius: 12px; padding: 12px 16px;
     display: flex; justify-content: space-between; align-items: center;
     .info { display: flex; align-items: center; gap: 8px; }
-    .name { font-size: 0.9rem; font-weight: 600; color: #495057; }
+    .name {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: ${({ theme }) => theme.text};
+	}
 `;
 const IconBox = styled.div` font-size: 16px; color: ${({ theme }) => theme.icon}; display: flex; `;
 const StarWrapper = styled.div` display: flex; gap: 2px; `;
@@ -263,7 +276,6 @@ const DetailContainer = styled.div`
     border-bottom-right-radius: 12px;
 `;
 const DetailContent = styled.div` padding: 30px 0; `;
-const DetailRowTitle = styled.div` text-align: center; font-size: 0.85rem; color: #adb5bd; margin-bottom: 20px; font-weight: 700; `;
 
 /* 스펙 셀 스타일 */
 const SpecCell = styled.div` display: flex; flex-direction: column; align-items: center; gap: 6px; `;
@@ -293,4 +305,4 @@ const Divider = styled.hr`
     border: none; border-top: 1px solid ${({ theme }) => theme.gray.regular};
     margin: 2rem -40px 1rem;
 `;
-const SectionTitle = styled.div` font-size: 0.95rem; font-weight: 700; color: #868e96; margin-bottom: 16px; `;
+const SectionTitle = styled.div` font-size: 0.95rem; font-weight: 700; color: ${({ theme }) => theme.text}; margin-bottom: 16px; `;
